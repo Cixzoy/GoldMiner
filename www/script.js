@@ -1,6 +1,55 @@
 let gold = 0;
 let diamonds = 0;
 
+// =====================
+// SAVE / LOAD
+// =====================
+
+function saveGame() {
+  localStorage.setItem("goldMinerSave", JSON.stringify({
+    gold: gold,
+    diamonds: diamonds,
+    power: power,
+    upgradeLevel: upgradeLevel,
+    upgradeCost: upgradeCost,
+    workers: workers,
+    workerCost: workerCost,
+    missionTarget: missionTarget,
+    missionReward: missionReward,
+    missionCompleted: missionCompleted,
+    achievements: achievements
+  }));
+}
+
+function loadGame() {
+  const save = localStorage.getItem("goldMinerSave");
+
+  if (!save) return;
+
+  const data = JSON.parse(save);
+
+  gold = data.gold ?? 0;
+  diamonds = data.diamonds ?? 0;
+  power = data.power ?? 1;
+
+  upgradeLevel = data.upgradeLevel ?? 1;
+  upgradeCost = data.upgradeCost ?? 10;
+
+  workers = data.workers ?? 0;
+  workerCost = data.workerCost ?? 100;
+
+  missionTarget = data.missionTarget ?? 500;
+  missionReward = data.missionReward ?? 5;
+  missionCompleted = data.missionCompleted ?? false;
+
+  achievements = data.achievements ?? {
+    firstDig: false,
+    richMiner: false,
+    diamondHunter: false,
+    workerEmpire: false
+  };
+}
+
 let power = 1;
 
 let upgradeLevel = 1;
@@ -379,6 +428,7 @@ clickButton.onclick = function() {
 
 
   updateScreen();
+  saveGame();
 };
 
 
@@ -403,6 +453,7 @@ upgradeButton.onclick = function() {
       upgradeCost + 10;
 
     updateScreen();
+    saveGame();
 
   }
 
@@ -443,6 +494,7 @@ autoButton.onclick = function() {
 
 
     updateScreen();
+    saveGame();
 
   }
 
@@ -477,6 +529,7 @@ setInterval(function() {
 
 
     updateScreen();
+    saveGame();
 
   }
 
@@ -543,6 +596,7 @@ claimMission.onclick = function() {
 
 
     updateScreen();
+    saveGame();
 
   }
 
@@ -577,4 +631,5 @@ closeAchievement.onclick = function() {
 // START
 // =====================
 
+loadGame();
 updateScreen();
