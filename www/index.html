@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gold Miner</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="game">
+
+    <h1>⛏️ GOLD MINER</h1>
+
+    <div class="stats">
+      <h2 id="gold">🪙 Gold: 0</h2>
+      <h3 id="diamond">💎 Diamond: 0</h3>
+      <p id="power">⛏️ Per Click: +1</p>
+      <p id="income">👷 Income: +0/sec</p>
+    </div>
+
+    <div class="mine">
+      <div class="rock">🪨</div>
+      <button id="clickButton">⛏️ MINE!</button>
+    </div>
+
+    <div class="menu">
+      <button id="upgradeButton">⬆️ UPGRADE</button>
+      <button id="autoButton">👷 WORKER</button>
+    </div>
+
+    <p id="upgradeInfo">Upgrade Lv.1 | Harga: 10 Gold</p>
+    <p id="autoInfo">Workers: 0 | Harga: 100 Gold</p>
+
+    <button id="missionButton">🎯 MISSION</button>
+    <button id="achievementButton">🏆 ACHIEVEMENTS</button>
+
+  </div>
+
+
+  <!-- MISSION -->
+
+  <div id="missionPopup" class="popup">
+
+    <div class="popupContent">
+
+      <h2>🎯 Mission</h2>
+
+      <p id="missionText">Kumpulkan 500 Gold</p>
+
+      <p id="missionProgress">
+        Progress: 0 / 500
+      </p>
+
+      <button id="claimMission">
+        💎 CLAIM REWARD
+      </button>
+
+      <button id="closeMission">
+        TUTUP
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ACHIEVEMENTS -->
+
+  <div id="achievementPopup" class="popup">
+
+    <div class="popupContent">
+
+      <h2>🏆 Achievements</h2>
+
+      <div id="achievementList"></div>
+
+      <button id="closeAchievement">
+        TUTUP
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- NOTIFICATION -->
+
+  <div id="notification"></div>
+
+
+  <script src="script.js"></script>
+
+</body>
+</html>
