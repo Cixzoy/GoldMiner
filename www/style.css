@@ -1,171 +1,392 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
 body {
   margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
   font-family: Arial, sans-serif;
-  background: #101010;
+  background:
+    radial-gradient(circle at top, #30251a 0%, #17130f 45%, #0b0b0b 100%);
   color: white;
   text-align: center;
+  overflow-x: hidden;
 }
+
+/* =========================
+   MAIN GAME
+========================= */
 
 .game {
-  max-width: 420px;
+  width: 100%;
+  max-width: 430px;
+  min-height: 100vh;
   margin: auto;
-  padding: 20px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
 }
+
+/* =========================
+   TITLE
+========================= */
 
 h1 {
-  margin-bottom: 20px;
-  font-size: 32px;
+  margin: 2px 0 10px;
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #ffd54a;
+  text-shadow:
+    0 2px 0 #8a5a00,
+    0 4px 12px rgba(255, 190, 40, 0.35);
 }
 
+/* =========================
+   STATS
+========================= */
+
 .stats {
-  background: #222;
+  background: linear-gradient(145deg, #292929, #1b1b1b);
+  border: 1px solid #3c3c3c;
   border-radius: 18px;
-  padding: 15px;
-  margin-bottom: 20px;
+  padding: 10px 8px;
+  margin-bottom: 10px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.35),
+    inset 0 1px rgba(255, 255, 255, 0.04);
 }
 
 .stats h2 {
-  margin: 5px;
-  font-size: 28px;
+  grid-column: 1 / -1;
+  margin: 2px;
+  font-size: 25px;
+  color: #ffd54a;
 }
 
 .stats h3 {
-  margin: 10px;
+  margin: 3px;
+  font-size: 16px;
 }
 
 .stats p {
-  margin: 6px;
+  margin: 3px;
+  font-size: 14px;
 }
+
+/* =========================
+   MINING AREA
+========================= */
 
 .mine {
-  background: #2d241c;
-  border-radius: 20px;
-  padding: 30px 20px;
-  margin-bottom: 20px;
+  flex: 1;
+
+  background:
+    radial-gradient(circle at 50% 35%, #4a3725 0%, #302318 45%, #211810 100%);
+
+  border: 1px solid #59432c;
+  border-radius: 22px;
+
+  padding: 12px 12px 14px;
+  margin-bottom: 10px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 260px;
+
+  box-shadow:
+    inset 0 0 35px rgba(0, 0, 0, 0.35),
+    0 10px 25px rgba(0, 0, 0, 0.35);
 }
 
+/* Batu / ore */
+
 .rock {
-  font-size: 90px;
-  margin-bottom: 15px;
+  font-size: 82px;
+  line-height: 1;
+  margin: 5px 0 14px;
+
+  filter:
+    drop-shadow(0 8px 5px rgba(0, 0, 0, 0.45));
+
+  user-select: none;
 }
+
+/* =========================
+   BUTTON
+========================= */
 
 button {
   border: none;
   border-radius: 14px;
-  padding: 15px 20px;
-  margin: 5px;
-  font-size: 17px;
-  font-weight: bold;
+
+  padding: 12px 16px;
+  margin: 4px;
+
+  font-size: 16px;
+  font-weight: 800;
+
+  color: white;
+  background: linear-gradient(145deg, #3b3b3b, #242424);
+
+  border: 1px solid #4b4b4b;
+
+  box-shadow:
+    0 5px 0 #111,
+    0 8px 15px rgba(0, 0, 0, 0.25);
+
   cursor: pointer;
+  transition:
+    transform 0.08s ease,
+    filter 0.15s ease;
 }
 
 button:active {
-  transform: scale(0.95);
+  transform: translateY(3px) scale(0.97);
+  box-shadow:
+    0 2px 0 #111,
+    0 4px 8px rgba(0, 0, 0, 0.25);
 }
+
+button:hover {
+  filter: brightness(1.12);
+}
+
+/* =========================
+   MINING BUTTON
+========================= */
 
 #clickButton {
-  width: 90%;
-  font-size: 24px;
+  width: 92%;
+  max-width: 360px;
+
+  padding: 15px 20px;
+
+  font-size: 22px;
+  letter-spacing: 0.5px;
+
+  color: #241600;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffe477,
+      #ffc62e,
+      #e79a00
+    );
+
+  border: 1px solid #ffdf61;
+
+  box-shadow:
+    0 6px 0 #9a6500,
+    0 10px 20px rgba(255, 180, 20, 0.22);
 }
+
+#clickButton:active {
+  box-shadow:
+    0 3px 0 #9a6500,
+    0 5px 10px rgba(255, 180, 20, 0.2);
+}
+
+/* =========================
+   MENU
+========================= */
 
 .menu {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 6px;
 }
 
-#upgradeButton,
+.menu button {
+  width: 100%;
+  margin: 0;
+  padding: 11px 8px;
+  font-size: 14px;
+}
+
+/* Upgrade */
+
+#upgradeButton {
+  background: linear-gradient(145deg, #4d82ff, #2854b8);
+  border-color: #6e98ff;
+}
+
+/* Auto */
+
 #autoButton {
-  width: 45%;
+  background: linear-gradient(145deg, #9c5cff, #6230b4);
+  border-color: #b88aff;
 }
 
-#missionButton,
-#achievementButton {
-  width: 90%;
-  margin-top: 10px;
+/* Mission */
+
+#missionButton {
+  width: 100%;
+  margin-top: 0;
+  background: linear-gradient(145deg, #20a96b, #13734a);
+  border-color: #42d592;
 }
+
+/* Achievement */
+
+#achievementButton {
+  width: 100%;
+  margin-top: 0;
+  background: linear-gradient(145deg, #e08a20, #a65308);
+  border-color: #ffb54a;
+}
+
+/* =========================
+   POPUP
+========================= */
 
 .popup {
   display: none;
+
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
 
   width: 100%;
   height: 100%;
 
-  background: rgba(0, 0, 0, 0.85);
+  padding: 18px;
+
+  background: rgba(0, 0, 0, 0.78);
 
   justify-content: center;
   align-items: center;
 
   z-index: 999;
+  backdrop-filter: blur(4px);
 }
 
 .popupContent {
-  background: #222;
-  padding: 25px;
-  border-radius: 20px;
-  width: 80%;
+  width: 100%;
   max-width: 350px;
+  max-height: 82vh;
+
+  overflow-y: auto;
+
+  background:
+    linear-gradient(145deg, #292929, #181818);
+
+  border: 1px solid #444;
+
+  padding: 20px;
+
+  border-radius: 20px;
+
   text-align: center;
 
   box-shadow:
-    0 0 30px rgba(255, 200, 50, 0.4);
+    0 0 35px rgba(255, 200, 50, 0.25),
+    0 15px 40px rgba(0, 0, 0, 0.6);
 }
 
 .popupContent h2 {
-  margin-top: 0;
+  margin: 0 0 14px;
+  color: #ffd54a;
 }
+
+/* =========================
+   MISSION
+========================= */
 
 #claimMission {
   display: none;
 }
 
+/* =========================
+   ACHIEVEMENT
+========================= */
+
 .achievement {
-  background: #333;
+  background: #303030;
+
+  border: 1px solid #414141;
+
   border-radius: 12px;
-  padding: 12px;
-  margin: 8px 0;
+
+  padding: 10px;
+  margin: 7px 0;
+
   text-align: left;
+
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .unlocked {
   border: 2px solid gold;
+
+  background:
+    linear-gradient(
+      145deg,
+      #403815,
+      #2d2810
+    );
+
+  box-shadow:
+    0 0 12px rgba(255, 215, 0, 0.18);
 }
 
-
-/* NOTIFICATION */
+/* =========================
+   NOTIFICATION
+========================= */
 
 #notification {
   position: fixed;
 
-  top: 20px;
+  top: 14px;
   left: 50%;
 
-  transform: translateX(-50%) translateY(-100px);
+  transform:
+    translateX(-50%)
+    translateY(-100px);
 
-  background: #222;
+  width: max-content;
+  max-width: 90%;
+
+  background:
+    linear-gradient(145deg, #292929, #171717);
+
   color: white;
 
-  padding: 15px 22px;
+  padding: 12px 18px;
 
+  border: 1px solid #555;
   border-radius: 14px;
 
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 15px;
+  font-weight: 800;
 
   z-index: 9999;
 
   opacity: 0;
 
   transition:
-    0.3s ease;
+    opacity 0.25s ease,
+    transform 0.3s ease;
 
   pointer-events: none;
 
   box-shadow:
-    0 5px 25px rgba(0, 0, 0, 0.5);
+    0 7px 25px rgba(0, 0, 0, 0.55);
 }
 
 #notification.show {
@@ -174,4 +395,49 @@ button:active {
   transform:
     translateX(-50%)
     translateY(0);
+}
+
+/* =========================
+   SMALL PHONE
+========================= */
+
+@media (max-height: 700px) {
+  .game {
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+
+  h1 {
+    font-size: 24px;
+    margin-bottom: 6px;
+  }
+
+  .stats {
+    padding: 7px;
+    margin-bottom: 7px;
+  }
+
+  .stats h2 {
+    font-size: 22px;
+  }
+
+  .mine {
+    min-height: 210px;
+    padding: 8px;
+    margin-bottom: 7px;
+  }
+
+  .rock {
+    font-size: 68px;
+    margin-bottom: 8px;
+  }
+
+  #clickButton {
+    padding: 12px;
+    font-size: 20px;
+  }
+
+  .menu button {
+    padding: 9px 6px;
+  }
 }
