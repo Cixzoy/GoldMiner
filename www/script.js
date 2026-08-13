@@ -1,6 +1,26 @@
 let gold = 0;
 let diamonds = 0;
 
+let criticalChance = 0.00009;
+let criticalLevel = 0;
+const criticalChances = [
+  0.00009,
+  0.0002,
+  0.0005,
+  0.001,
+  0.002,
+  0.005
+];
+
+const criticalCosts = [
+  0,
+  500,
+  2000,
+  10000,
+  50000,
+  250000
+];
+
 // =====================
 // SAVE / LOAD
 // =====================
@@ -9,6 +29,8 @@ function saveGame() {
   localStorage.setItem("goldMinerSave", JSON.stringify({
     gold: gold,
     diamonds: diamonds,
+    criticalChance: criticalChance,
+    criticalLevel: criticalLevel,
     power: power,
     upgradeLevel: upgradeLevel,
     upgradeCost: upgradeCost,
@@ -30,6 +52,10 @@ function loadGame() {
 
   gold = data.gold ?? 0;
   diamonds = data.diamonds ?? 0;
+
+criticalChance = data.criticalChance ?? 0.00009;
+criticalLevel = data.criticalLevel ?? 0;
+
   power = data.power ?? 1;
 
   upgradeLevel = data.upgradeLevel ?? 1;
@@ -105,8 +131,14 @@ const upgradeButton =
 const autoButton =
   document.getElementById("autoButton");
 
+const criticalButton =
+  document.getElementById("criticalButton");
+
 const upgradeInfo =
   document.getElementById("upgradeInfo");
+
+const criticalInfo =
+  document.getElementById("criticalInfo");
 
 const autoInfo =
   document.getElementById("autoInfo");
@@ -201,6 +233,29 @@ function updateScreen() {
     " | Harga: " +
     upgradeCost +
     " Gold";
+
+
+  criticalInfo.textContent =
+    "Critical Lv." +
+    criticalLevel +
+    " | Chance: " +
+    (criticalChance * 100) +
+    "%";
+
+
+if (criticalLevel >= criticalCosts.length - 1) {
+
+  criticalButton.textContent =
+    "💥 CRITICAL MAX";
+
+} else {
+
+  criticalButton.textContent =
+    "💥 CRITICAL " +
+    criticalCosts[criticalLevel + 1] +
+    "G";
+
+}
 
 
   autoInfo.textContent =
@@ -351,9 +406,9 @@ clickButton.onclick = function() {
   let earnedGold = power;
 
 
-  // CRITICAL 0.9%
+  // CRITICAL
 
-  if (Math.random() < 0.009) {
+   if (Math.random() < criticalChance) {
 
     earnedGold =
       power * 5;
@@ -456,6 +511,67 @@ upgradeButton.onclick = function() {
     saveGame();
 
   }
+
+};
+
+
+
+// =====================
+// CRITICAL UPGRADE
+// =====================
+
+criticalButton.onclick = function() {
+
+  if (criticalLevel >= criticalCosts.length - 1) {
+
+    showNotification(
+      "💥 CRITICAL sudah MAX!"
+    );
+
+    return;
+  }
+
+
+  const nextLevel =
+    criticalLevel + 1;
+
+  const cost =
+    criticalCosts[nextLevel];
+
+
+  if (gold < cost) {
+
+    showNotification(
+      "❌ Gold tidak cukup! Butuh " +
+      cost +
+      " Gold."
+    );
+
+    return;
+  }
+
+
+  gold =
+    gold - cost;
+
+  criticalLevel =
+    nextLevel;
+
+  criticalChance =
+    criticalChances[criticalLevel];
+
+
+  showNotification(
+    "💥 CRITICAL Lv." +
+    criticalLevel +
+    " → " +
+    (criticalChance * 100) +
+    "%!"
+  );
+
+
+  updateScreen();
+  saveGame();
 
 };
 
